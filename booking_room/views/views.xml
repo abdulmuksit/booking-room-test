@@ -1,0 +1,101 @@
+<odoo>
+  <data>
+
+    <!-- Master Ruangan -->
+    <record id="view_master_ruangan_tree" model="ir.ui.view">
+      <field name="name">master.ruangan.tree</field>
+      <field name="model">master.room</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="tipe_ruangan"/>
+          <field name="lokasi_ruangan"/>
+          <field name="kapasitas"/>
+          <field name="keterangan"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_master_ruangan_form" model="ir.ui.view">
+      <field name="name">master.ruangan.form</field>
+      <field name="model">master.room</field>
+      <field name="arch" type="xml">
+        <form string="">
+          <sheet>
+            <group>
+              <group>
+                <field name="name"/>
+                <field name="tipe_ruangan"/>
+                <field name="lokasi_ruangan"/>
+              </group>
+              <group>
+                <field name="foto_ruangan"/>
+                <field name="kapasitas"/>
+                <field name="keterangan"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    
+    <record id="action_master_ruangan" model="ir.actions.act_window">
+      <field name="name">Master Ruangan</field>
+      <field name="res_model">master.room</field>
+      <field name="view_mode">tree,kanban,form</field>
+    </record>
+    <!-- Master Ruangan -->
+
+    <!-- Pemesanan Ruangan -->
+    <record id="view_pemesanan_ruangan_tree" model="ir.ui.view">
+      <field name="name">pemesanan.ruangan.tree</field>
+      <field name="model">pemesanan.ruangan</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="room_id"/>
+          <field name="nama_pemesanan"/>
+          <field name="tanggal_pemesanan"/>
+          <field name="status_pemesanan"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_pemesanan_ruangan_form" model="ir.ui.view">
+        <field name="name">pemesanan.ruangan.form</field>
+        <field name="model">pemesanan.ruangan</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_proses_pemesanan" type="object" string="Proses Pemesanan" class="oe_highlight" attrs="{'invisible': [('status_pemesanan', '!=', 'draft')]}"/>
+                    <button name="action_selesai_pemesanan" type="object" string="Selesai Pemesanan" class="oe_highlight" attrs="{'invisible': [('status_pemesanan', '!=', 'on_going')]}"/>
+                    <field name="status_pemesanan" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="room_id"/>
+                        <field name="nama_pemesanan"/>
+                        <field name="tanggal_pemesanan"/>
+                        <field name="catatan_pemesanan"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pemesanan_ruangan" model="ir.actions.act_window">
+        <field name="name">Pemesanan Ruangan</field>
+        <field name="res_model">pemesanan.ruangan</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- Pemesanan Ruangan -->
+
+    <menuitem name="Pemesanan Ruangan" id="booking_room_parent"/>
+
+    <menuitem name="Master Ruangan" id="master_ruangan_menu" action="action_master_ruangan" parent="booking_room_parent"/>
+
+    <menuitem name="Pemesanan" id="pemesanan_menu" action="action_pemesanan_ruangan" parent="booking_room_parent"/>
+
+  </data>
+</odoo>

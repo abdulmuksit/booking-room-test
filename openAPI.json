@@ -1,0 +1,126 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+    "title": "API Tracking Pemesanan",
+    "description": "API untuk tracking status pemesanan ruangan di Odoo 16.",
+    "version": "1.0.0"
+    },
+    "servers": [
+    {
+        "url": "http://localhost:8069",
+        "description": "Local Odoo Server"
+    }
+    ],
+    "paths": {
+    "/api/tracking_pemesanan'": {
+        "post": {
+        "summary": "Track Status Pemesanan",
+        "description": "Mengambil status pemesanan ruangan berdasarkan nomor pemesanan.",
+        "tags": ["Pemesanan Ruangan"],
+        "requestBody": {
+            "description": "Nomor pemesanan yang akan dilacak.",
+            "required": true,
+            "content": {
+            "application/json": {
+                "schema": {
+                "type": "object",
+                "properties": {
+                    "nomor_pemesanan": {
+                    "type": "string",
+                    "description": "Nomor pemesanan ruangan.",
+                    "example": "PSN-SM-20231024-001"
+                    }
+                }
+                }
+            }
+            }
+        },
+        "responses": {
+            "200": {
+            "description": "Sukses mendapatkan status pemesanan.",
+            "content": {
+                "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                    "nomor_pemesanan": {
+                        "type": "string",
+                        "description": "Nomor pemesanan."
+                    },
+                    "ruangan": {
+                        "type": "string",
+                        "description": "Nama ruangan yang dipesan."
+                    },
+                    "nama_pemesan": {
+                        "type": "string",
+                        "description": "Nama pemesanan ruangan."
+                    },
+                    "tanggal_pemesanan": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "Tanggal pemesanan."
+                    },
+                    "status_pemesanan": {
+                        "type": "string",
+                        "description": "Status pemesanan ruangan."
+                    },
+                    "catatan_pemesanan": {
+                        "type": "string",
+                        "description": "Catatan pemesanan, jika ada."
+                    }
+                    },
+                    "example": {
+                    "nomor_pemesanan": "PSN-SM-20231024-001",
+                    "ruangan": "Meeting Room Kecil",
+                    "nama_pemesan": "Budi Santoso",
+                    "tanggal_pemesanan": "2023-10-24",
+                    "status_pemesanan": "draft",
+                    "catatan_pemesanan": "Pesanan untuk meeting tahunan"
+                    }
+                }
+                }
+            }
+            },
+            "400": {
+            "description": "Kesalahan input. Nomor pemesanan tidak ditemukan di request.",
+            "content": {
+                "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                    "error": {
+                        "type": "string",
+                        "description": "Pesan error yang menjelaskan kesalahan input."
+                    }
+                    },
+                    "example": {
+                    "error": "Nomor pemesanan tidak ditemukan."
+                    }
+                }
+                }
+            }
+            },
+            "404": {
+            "description": "Pemesanan tidak ditemukan.",
+            "content": {
+                "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                    "error": {
+                        "type": "string",
+                        "description": "Pemesanan tidak ditemukan."
+                    }
+                    },
+                    "example": {
+                    "error": "Pemesanan tidak ditemukan."
+                    }
+                }
+                }
+            }
+            }
+        }
+        }
+    }
+    }
+}

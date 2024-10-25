@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sequence_pemesanan_ruangan" model="ir.sequence">
+        <field name="name">Pemesanan Ruangan</field>
+        <field name="code">pemesanan.ruangan</field>
+        <field name="padding">4</field>
+        <field name="prefix">PSN/tipe_ruangan/%(day)s-%(month)s-%(year)s/</field>
+        <field name="implementation">no_gap</field>
+        <field name="company_id" eval="False" />
+    </record>
+
+</odoo>
